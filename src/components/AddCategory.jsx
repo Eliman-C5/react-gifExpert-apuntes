@@ -1,12 +1,13 @@
-import { useState } from "react"
+import { useState } from "react";
+import PropTypes from "prop-types";
 
 export const AddCategory = ({onNewCategory}) => {
 
   const [inputValue, setinputValue] = useState("");
   
-  const onInputChange = (e) => {
+  const onInputChange = ({ target }) => {
     //console.log(e.target.value)
-    setinputValue(e.target.value);
+    setinputValue(target.value);
   }
   
   //Si quieres evitar mandar tanto el state como el setState, puedes hacer una funcion callback en el onSubmit
@@ -25,11 +26,12 @@ export const AddCategory = ({onNewCategory}) => {
     //El onNewCategory esta enviando un valor al padre. En pocas palabras
     //Es una prop que en vez de recibir un valor, envia un valor
     onNewCategory( inputValue.trim() );
+    onNewCategory( inputValue.trim() );
     setinputValue("");
   }
 
   return (
-    <form onSubmit={onSubmit}>
+    <form onSubmit={onSubmit} aria-label="form">
       <input 
       type='text'
       placeholder="Buscar Gifs"
@@ -38,4 +40,8 @@ export const AddCategory = ({onNewCategory}) => {
       />
     </form>
   )
+}
+
+AddCategory.propTypes = {
+  onNewCategory: PropTypes.func.isRequired
 }
